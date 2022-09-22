@@ -40,3 +40,7 @@ void Stacker::readPPMs(string name, int numPPM) {
 void Stacker::stackPPMs() {
 
 }
+
+void Stacker::output(string outputName) {
+
+}

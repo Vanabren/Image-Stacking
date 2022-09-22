@@ -24,7 +24,8 @@ class Stacker {
  public:
   void readPPMs(string nameImg, int numImg);
   void stackPPMs();
-  
+  void output(string outputName);
+	      
 };
 
 #endif //STACKER_H

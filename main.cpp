@@ -13,19 +13,19 @@
 using namespace std;
 
 int main() {
-  string imageToStack = "";
+  string imageNameToStack = "";
   int numImages = 0;
   Stacker imgToStack;
   
   cout << "Please enter the image you wish to stack: ";
-  cin >> imageToStack;
+  cin >> imageNameToStack;
 
   cout << "Please enter the number of images: ";
   cin >> numImages;
 
-  imgToStack.readPPMs(imageToStack, numImages);
+  imgToStack.readPPMs(imageNameToStack, numImages);
   imgToStack.stackPPMs();
-  imgToStack.outputPPM();
+  imgToStack.outputPPM(imageNameToStack);
   
   return 0;
 }
