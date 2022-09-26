@@ -43,10 +43,27 @@ void Stacker::readPPMs(string name, int numPPM) {
   int numFile = 001; // start at 001 because that's where ppm number starts
   string ppmName = "ppms/" + name + "/" + name + "_" + numFile;
   cout << ppmName << endl; // to test if string concat worked
-  fin.open(name
+  fin.open(ppmName);
+  fin >> magic_number >> width >> height >> max_color;
+  fin >> pixel.red >> pixel.green >> pixel.blue;
+  pixels.push_back(pixel);
+  for (int i = 0; i < width; i++){
+    for (int j = 0; j < height; j++){
+      fin >> pixel.red >> pixel.green >> pixel.blue;
+      pixels.push_back(pixel);
+    }
+  }
+  pixels.shrink_to_fit();
+  fin.close();
 }
 
 void Stacker::stackPPMs() {
+  pixels.push_back(pixel);
+  for (int i = 0; i < width; i++){
+    for (int j = 0; j < height; j++){
+      
+    }
+  }
 
 }
 
