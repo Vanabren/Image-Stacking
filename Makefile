@@ -2,9 +2,9 @@
  # @file Makefile
  # @author Vance Brenderabrandis + Jacqueline
  # @date 2022-09-22
- # @brief later
+ # @brief Makefile for Image Stacker program
  # 
- # later
+ # Makefile used to make compilation of Image Stacker program quicker and easier.
  ##
 
 CC = g++ # Compiler is g++
