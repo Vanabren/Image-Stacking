@@ -28,12 +28,21 @@ Stacker::Stacker() {
 }
 
 Stacker::~Stacker() {
-
+  magic_number = "";
+  width = 0;
+  height = 0;
+  max_color = 0;
+  pixel.red = 0;
+  pixel.green = 0;
+  pixel.blue = 0;
+  pixels.clear();
 }
 
 void Stacker::readPPMs(string name, int numPPM) {
   ifstream fin;
-  
+  int numFile = 001; // start at 001 because that's where ppm number starts
+  string ppmName = "ppms/" + name + "/" + name + "_" + numFile;
+  cout << ppmName << endl; // to test if string concat worked
   fin.open(name
 }
 
