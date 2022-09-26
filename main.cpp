@@ -2,9 +2,9 @@
  * @file main.cpp
  * @author Vance Brenderabrandis + Jacqueline
  * @date 2022-09-22
- * @brief later
+ * @brief Image Stacker program 
  * 
- * later
+ * Program that averages individual pixel data per pixel within a PPM file to produce a new, clearer image.
  */
 
 #include <iostream>
