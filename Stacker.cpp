@@ -10,7 +10,6 @@
 
 #include <iostream>
 #include <fstream>
-// #include <vector>
 #include <string>
 #include "Stacker.h"
 
@@ -46,7 +45,7 @@ void Stacker::readPPMs(string name, int numPPM) {
       ppmName = "ppms/" + name + "/" + name + "_00" + num + ".ppm"; // eventually need to remove ppms/
     else
       ppmName = "ppms/" + name + "/" + name + "_0" + num + ".ppm"; // eventually need to remove ppms/
-    cout << ppmName << endl; // to test if string concat worked
+   
     cout << "Stacking images:\n";
     cout << "     " << ppmName << endl;
     
@@ -69,6 +68,7 @@ void Stacker::readPPMs(string name, int numPPM) {
     }
     fin.close();
   }
+  cout << "\nStacking succeeded.\n";
 }
 
 void Stacker::stackPPMs(int numPPM) {
@@ -95,4 +95,5 @@ void Stacker::output(string outputName) {
   }
 
   fout.close();
+  cout << "Output written to: " << outputFileName << endl << endl;
 }
