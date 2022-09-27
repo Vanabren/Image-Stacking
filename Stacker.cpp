@@ -24,7 +24,6 @@ Stacker::Stacker() {
   pixel.red = 0;
   pixel.green = 0;
   pixel.blue = 0;
-  pixels.push_back(0);
 }
 
 Stacker::~Stacker() {
@@ -54,14 +53,12 @@ void Stacker::readPPMs(string name, int numPPM) {
     
     pixels.resize(width * height);
     for(int i = 0; i < width * height; i++) { // initializes every pixel in vector to zero RGB values for future math
-      pixels[i].pixel.red = pixel.red;
-      pixels[i].pixel.green = pixel.green;
-      pixels[i].pixel.blue = pixel.blue;
+      pixels[i] = pixel; // because pixel defaults to 0 RGB values, can just assign every pixel to base pixel
     }
     
     fin >> pixel.red >> pixel.green >> pixel.blue;
     
-    for (int i = 0; i < width * height; i++) {
+    for (int i = 0; i < width * height; i++) { // continuously adds values from all ppm files to be divided later
       pixels[i].pixel.red += pixel.red;
       pixels[i].pixel.green += pixel.green;
       pixels[i].pixel.blue += pixel.blue;
@@ -81,5 +78,19 @@ void Stacker::stackPPMs(int numPPM) {
 }
 
 void Stacker::output(string outputName) {
+  ofstream fout;
+  string outputFileName = outputName + ".ppm";
+  fout.open(outputFileName);
 
+  fout << magic_number << endl;
+  fout << width << " " << height << endl;
+  fout << max_color << endl;
+
+  for(int i = 0; i < width * height; i++) {
+    fout << pixels[i].pixel.red << " ";
+    fout << pixels[i].pixel.green << " ";
+    fout << pixels[i].pixel.blue << "   ";
+  }
+
+  fout.close();
 }
