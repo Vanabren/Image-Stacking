@@ -24,8 +24,8 @@ int main() {
   cin >> numImages;
 
   imgToStack.readPPMs(imageNameToStack, numImages);
-  imgToStack.stackPPMs();
-  imgToStack.outputPPM(imageNameToStack);
+  imgToStack.stackPPMs(numImages);
+  imgToStack.output(imageNameToStack);
   
   return 0;
 }

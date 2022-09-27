@@ -10,6 +10,8 @@
 #ifndef STACKER_H
 #define STACKER_H
 
+#include <vector>
+
 class Stacker {
  private:
   std::string magic_number;
@@ -19,6 +21,7 @@ class Stacker {
     int green;
     int blue;
   };
+  pixel p;
   std::vector<pixel> pixels; // vector of pixels 
   
  public:

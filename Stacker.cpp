@@ -10,7 +10,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <vector>
+// #include <vector>
 #include <string>
 #include "Stacker.h"
 
@@ -21,9 +21,9 @@ Stacker::Stacker() {
   width = 0;
   height = 0;
   max_color = 0;
-  pixel.red = 0;
-  pixel.green = 0;
-  pixel.blue = 0;
+  p.red = 0;
+  p.green = 0;
+  p.blue = 0;
 }
 
 Stacker::~Stacker() {
@@ -31,19 +31,21 @@ Stacker::~Stacker() {
   width = 0;
   height = 0;
   max_color = 0;
-  pixel.red = 0;
-  pixel.green = 0;
-  pixel.blue = 0;
+  p.red = 0;
+  p.green = 0;
+  p.blue = 0;
   pixels.clear();
 }
 
 void Stacker::readPPMs(string name, int numPPM) {
   ifstream fin;
+  string ppmName = "";
   for(int a = 1; a <= numPPM; a++) {
+    string num = to_string(a);
     if(a < 10)
-      string ppmName = "ppms/" + name + "/" + name + "_00" + a + ".ppm"; // eventually need to remove ppms/
+      ppmName = "ppms/" + name + "/" + name + "_00" + num + ".ppm"; // eventually need to remove ppms/
     else
-      string ppmName = "ppms/" + name + "/" + name + "_0" + a + ".ppm"; // eventually need to remove ppms/
+      ppmName = "ppms/" + name + "/" + name + "_0" + num + ".ppm"; // eventually need to remove ppms/
     cout << ppmName << endl; // to test if string concat worked
     cout << "Stacking images:\n";
     cout << "     " << ppmName << endl;
@@ -53,17 +55,17 @@ void Stacker::readPPMs(string name, int numPPM) {
     
     pixels.resize(width * height);
     for(int i = 0; i < width * height; i++) { // initializes every pixel in vector to zero RGB values for future math
-      pixels[i] = pixel; // because pixel defaults to 0 RGB values, can just assign every pixel to base pixel
+      pixels[i] = p; // because pixel p defaults to 0 RGB values, can just assign p to every pixel in pixels
     }
     
-    fin >> pixel.red >> pixel.green >> pixel.blue;
+    fin >> p.red >> p.green >> p.blue;
     
     for (int i = 0; i < width * height; i++) { // continuously adds values from all ppm files to be divided later
-      pixels[i].pixel.red += pixel.red;
-      pixels[i].pixel.green += pixel.green;
-      pixels[i].pixel.blue += pixel.blue;
+      pixels[i].red += p.red;
+      pixels[i].green += p.green;
+      pixels[i].blue += p.blue;
       
-      fin >> pixel.red >> pixel.green >> pixel.blue;
+      fin >> p.red >> p.green >> p.blue;
     }
     fin.close();
   }
@@ -71,9 +73,9 @@ void Stacker::readPPMs(string name, int numPPM) {
 
 void Stacker::stackPPMs(int numPPM) {
   for (int i = 0; i < width * height; i++) {
-    pixels[i].pixel.red = pixels[i].pixel.red / numPPM;
-    pixels[i].pixel.green = pixels[i].pixel.green / numPPM;
-    pixels[i].pixel.blue = pixels[i].pixel.blue / numPPM;
+    pixels[i].red = pixels[i].red / numPPM;
+    pixels[i].green = pixels[i].green / numPPM;
+    pixels[i].blue = pixels[i].blue / numPPM;
   } 
 }
 
@@ -87,9 +89,9 @@ void Stacker::output(string outputName) {
   fout << max_color << endl;
 
   for(int i = 0; i < width * height; i++) {
-    fout << pixels[i].pixel.red << " ";
-    fout << pixels[i].pixel.green << " ";
-    fout << pixels[i].pixel.blue << "   ";
+    fout << pixels[i].red << " ";
+    fout << pixels[i].green << " ";
+    fout << pixels[i].blue << "   ";
   }
 
   fout.close();
