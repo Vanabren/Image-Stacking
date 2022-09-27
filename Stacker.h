@@ -12,17 +12,36 @@
 
 class Stacker {
  private:
-  string magic_number;
+  std::string magic_number;
   int width, height, max_color;
   struct pixel { // RGB data values for individual pixels
     int red;
     int green;
     int blue;
-  }
+  };
   std::vector<pixel> pixels; // vector of pixels 
   
  public:
 
+
+/**
+ * Default constructor for Stacker class. Initializes everything to blank / zero
+ *
+ * @post All variables, the pixel struct, and vector of pixels are initialized to zero, blank, etc.
+ * 
+ */
+  Stacker();
+
+
+/**
+ * Destructor for Stacker class. Sets all variables to blank/zero and clears the vector
+ *
+ * @pre object of Stacker class goes out of scope
+ * @post All variables set to zero / blank, vector cleared
+ * 
+ */
+  ~Stacker();
+  
 /**
  * Reads in PPM data for selected images into vector for later use
  *
@@ -32,7 +51,7 @@ class Stacker {
  * @post PPM data read into appropriate variables, pixels vector filled with pixel structs from the PPM files, etc.
  * 
  */
-  void readPPMs(string nameImg, int numImg);
+  void readPPMs(std::string nameImg, int numImg);
 
 /**
  * Averages pixel data from all read-in PPM files for later use
@@ -53,7 +72,7 @@ class Stacker {
  * @return Nothing, only outputs new PPM file of averaged data
  * 
  */
-  void output(string outputName);
+  void output(std::string outputName);
 	      
 };
 
