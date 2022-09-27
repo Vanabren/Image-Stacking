@@ -1,5 +1,4 @@
 # Image-Stacking
-Alt-H1
 
 ### Design Decisions:
 :: Only use three methods in the Stacker class for functionality - readPPMs, avgPPMs, and output.
@@ -22,6 +21,6 @@ Alt-H1
 :: Besides checking over the other's code as we programmed and correcting each other's mistakes, we also bugfixed different methods that needed to be fixed at different intervals to allow for a fresh perspective and also take a break from staring at the same lines of code for too long
 
 ##### Authors
-Alt-H2
+
 ###### Vance Brenderabrandis
 ###### Jacqueline Bybee
