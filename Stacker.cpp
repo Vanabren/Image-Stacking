@@ -12,7 +12,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <Stacker.h>
+#include "Stacker.h"
 
 using namespace std;
 
@@ -24,7 +24,7 @@ Stacker::Stacker() {
   pixel.red = 0;
   pixel.green = 0;
   pixel.blue = 0;
-  pixels[0] = 0;
+  pixels.push_back(0);
 }
 
 Stacker::~Stacker() {
@@ -40,28 +40,32 @@ Stacker::~Stacker() {
 
 void Stacker::readPPMs(string name, int numPPM) {
   ifstream fin;
-  int numFile = 001; // start at 001 because that's where ppm number starts
-  string ppmName = "ppms/" + name + "/" + name + "_" + numFile;
-  cout << ppmName << endl; // to test if string concat worked
-  fin.open(ppmName);
-  fin >> magic_number >> width >> height >> max_color;
-  fin >> pixel.red >> pixel.green >> pixel.blue;
-  pixels.push_back(pixel);
-  for (int i = 0; i < width; i++){
-    for (int j = 0; j < height; j++){
-      fin >> pixel.red >> pixel.green >> pixel.blue;
-      pixels.push_back(pixel);
+  for(int a = 1; a <= numPPM; a++) {
+    if(a < 10)
+      string ppmName = "ppms/" + name + "/" + name + "_00" + a + ".ppm";
+    else
+      string ppmName = "ppms/" + name + "/" + name + "_0" + a + ".ppm";
+    cout << ppmName << endl; // to test if string concat worked
+    
+    fin.open(ppmName);
+    fin >> magic_number >> width >> height >> max_color;
+    fin >> pixel.red >> pixel.green >> pixel.blue;
+    pixels.push_back(pixel);
+    for (int i = 0; i < width; i++){
+      for (int j = 0; j < height; j++){
+	fin >> pixel.red >> pixel.green >> pixel.blue;
+	pixels.push_back(pixel);
+      }
     }
+    pixels.shrink_to_fit();
+    fin.close();
   }
-  pixels.shrink_to_fit();
-  fin.close();
 }
 
-void Stacker::stackPPMs() {
-  pixels.push_back(pixel);
-  for (int i = 0; i < width; i++){
-    for (int j = 0; j < height; j++){
-      
+void Stacker::stackPPMs(int numPPM) {
+  for (int i = 0; i < width; i++) {
+    for (int j = 0; j < height; j++) {
+      pixels
     }
   }
 

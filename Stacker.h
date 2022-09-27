@@ -37,12 +37,13 @@ class Stacker {
 /**
  * Averages pixel data from all read-in PPM files for later use
  *
+ * @param int numPPM Number of images that need to be stacked
  * @pre Data has been read in through use of the readPPMs method
  * @return Nothing
  * @post vector pixels now only contains averaged pixel data for new PPM
  * 
  */
-  void stackPPMs();
+  void stackPPMs(int numPPM);
 
 /**
  * Outputs averaged/stacked image file for viewing
