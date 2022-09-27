@@ -2,9 +2,9 @@
  * @file Stacker.cpp
  * @author Vance Brenderabrandis + Jacqueline
  * @date 2022-09-22
- * @brief later
+ * @brief Implementation of Stacker class methods and members
  * 
- * later
+ * Implementation of Stacker class methods and members to create an image-stacked ppm file and output it
  */
 
 
@@ -52,10 +52,7 @@ void Stacker::readPPMs(string name, int numPPM) {
     fin.open(ppmName);
     fin >> magic_number >> width >> height >> max_color;
     
-    pixels.resize(width * height);
-    for(int i = 0; i < width * height; i++) { // initializes every pixel in vector to zero RGB values for future math
-      pixels[i] = p; // because pixel p defaults to 0 RGB values, can just assign p to every pixel in pixels
-    }
+    pixels.resize(width * height, p);
     
     fin >> p.red >> p.green >> p.blue;
     
@@ -71,7 +68,7 @@ void Stacker::readPPMs(string name, int numPPM) {
 }
 
 void Stacker::stackPPMs(int numPPM) {
-  cout << endl << endl << pixels[0].red << endl << endl;
+  cout << endl << endl << pixels[17].red << endl << endl;
   for (int i = 0; i < width * height; i++) {
     pixels[i].red = pixels[i].red / numPPM;
     pixels[i].green = pixels[i].green / numPPM;
