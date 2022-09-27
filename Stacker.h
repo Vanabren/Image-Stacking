@@ -46,7 +46,7 @@ class Stacker {
   ~Stacker();
   
 /**
- * Reads in PPM data for selected images into vector for later use
+ * Reads in PPM data from however many images the user asks for and adds them together to later be averaged
  *
  * @param string nameImg Name of the PPM files the user wishes to have Stacked
  * @param int numImg The number of images they wish to stack
@@ -57,15 +57,15 @@ class Stacker {
   void readPPMs(std::string nameImg, int numImg);
 
 /**
- * Averages pixel data from all read-in PPM files for later use
+ * Averages pixel data from all read-in PPM files within pixels vector
  *
  * @param int numPPM Number of images that need to be stacked
- * @pre Data has been read in through use of the readPPMs method
+ * @pre Data has been read in through use of the readPPMs method and added on top of each other
  * @return Nothing
  * @post vector pixels now only contains averaged pixel data for new PPM
  * 
  */
-  void stackPPMs(int numPPM);
+  void avgPPMs(int numPPM);
 
 /**
  * Outputs averaged/stacked image file for viewing
