@@ -42,33 +42,42 @@ void Stacker::readPPMs(string name, int numPPM) {
   ifstream fin;
   for(int a = 1; a <= numPPM; a++) {
     if(a < 10)
-      string ppmName = "ppms/" + name + "/" + name + "_00" + a + ".ppm";
+      string ppmName = "ppms/" + name + "/" + name + "_00" + a + ".ppm"; // eventually need to remove ppms/
     else
-      string ppmName = "ppms/" + name + "/" + name + "_0" + a + ".ppm";
+      string ppmName = "ppms/" + name + "/" + name + "_0" + a + ".ppm"; // eventually need to remove ppms/
     cout << ppmName << endl; // to test if string concat worked
+    cout << "Stacking images:\n";
+    cout << "     " << ppmName << endl;
     
     fin.open(ppmName);
     fin >> magic_number >> width >> height >> max_color;
-    fin >> pixel.red >> pixel.green >> pixel.blue;
-    pixels.push_back(pixel);
-    for (int i = 0; i < width; i++){
-      for (int j = 0; j < height; j++){
-	fin >> pixel.red >> pixel.green >> pixel.blue;
-	pixels.push_back(pixel);
-      }
+    
+    pixels.resize(width * height);
+    for(int i = 0; i < width * height; i++) { // initializes every pixel in vector to zero RGB values for future math
+      pixels[i].pixel.red = pixel.red;
+      pixels[i].pixel.green = pixel.green;
+      pixels[i].pixel.blue = pixel.blue;
     }
-    pixels.shrink_to_fit();
+    
+    fin >> pixel.red >> pixel.green >> pixel.blue;
+    
+    for (int i = 0; i < width * height; i++) {
+      pixels[i].pixel.red += pixel.red;
+      pixels[i].pixel.green += pixel.green;
+      pixels[i].pixel.blue += pixel.blue;
+      
+      fin >> pixel.red >> pixel.green >> pixel.blue;
+    }
     fin.close();
   }
 }
 
 void Stacker::stackPPMs(int numPPM) {
-  for (int i = 0; i < width; i++) {
-    for (int j = 0; j < height; j++) {
-      pixels
-    }
-  }
-
+  for (int i = 0; i < width * height; i++) {
+    pixels[i].pixel.red = pixels[i].pixel.red / numPPM;
+    pixels[i].pixel.green = pixels[i].pixel.green / numPPM;
+    pixels[i].pixel.blue = pixels[i].pixel.blue / numPPM;
+  } 
 }
 
 void Stacker::output(string outputName) {
