@@ -68,15 +68,16 @@ void Stacker::readPPMs(string name, int numPPM) {
     }
     fin.close();
   }
-  cout << "\nStacking succeeded.\n";
 }
 
 void Stacker::stackPPMs(int numPPM) {
+  cout << endl << endl << pixels[0].red << endl << endl;
   for (int i = 0; i < width * height; i++) {
     pixels[i].red = pixels[i].red / numPPM;
     pixels[i].green = pixels[i].green / numPPM;
     pixels[i].blue = pixels[i].blue / numPPM;
-  } 
+  }
+  cout << "\nStacking succeeded.\n";
 }
 
 void Stacker::output(string outputName) {
@@ -91,7 +92,7 @@ void Stacker::output(string outputName) {
   for(int i = 0; i < width * height; i++) {
     fout << pixels[i].red << " ";
     fout << pixels[i].green << " ";
-    fout << pixels[i].blue << "   ";
+    fout << pixels[i].blue << endl;
   }
 
   fout.close();
